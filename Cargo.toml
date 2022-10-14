@@ -1,0 +1,20 @@
+[package]
+name = "newnewidmangler"
+version = "2.0.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+sycamore = { version = "0.8", features = ["suspense"] }
+
+web-sys = { version = "0.3.60", features = ["Clipboard", "Window", "Navigator"] }
+
+serde = { version = "1.0", features = ["derive"] }
+
+reqwasm = "0.5"
+
+[profile.release]
+lto = true
+opt-level = "s"
+strip = "debuginfo"

@@ -1,0 +1,90 @@
+.mc-dark-red {
+    color: #a00
+}
+.mc-red {
+    color: #f55
+}
+.mc-gold {
+    color: #fa0;
+}
+.mc-yellow {
+    color: #ff5;
+}
+.mc-dark-green {
+    color: #0a0;
+}
+.mc-green {
+    color: #5f5;
+}
+.mc-aqua {
+    color: #5ff;
+}
+.mc-dark-aqua {
+    color: #0aa;
+}
+.mc-dark-blue {
+    color: #00a;
+}
+.mc-blue {
+    color: #55f;
+}
+.mc-light-purple {
+    color: #f5f;
+}
+.mc-purple {
+    color: #a0a;
+}
+.mc-white {
+    color: #fff;
+}
+.mc-gray {
+    color: #aaa;
+}
+.mc-dark-gray {
+    color: #555;
+}
+.mc-black {
+    color: #000;
+}
+
+@media (prefers-color-scheme: dark) {
+    html, body {
+        background-color: black;
+        color: white;
+    }
+    .box {
+        background-color: #222;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    html, body {
+        background-color: white;
+        color: black;
+    }
+}
+
+.box {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+code {
+    display: block;
+    background-color: black;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+h1 {
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+h3 {
+    margin: 0;
+    margin-bottom: 5px;
+}
