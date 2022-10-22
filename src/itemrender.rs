@@ -89,40 +89,40 @@ pub fn ItemRender<'a, G: Html>(cx: Scope<'a>, props: ItemRenderProps<'a>) -> Vie
             // defences
             (if let Some(defs) = item.defenses.clone() {
                 view!{cx,
-                    (if let Some(d) = defs.health.clone() {
+                    (if let Some(d) = defs.health {
                         view!{cx,
                             span(class="mc-dark-red") {(format!("❤ Health: {d}"))}
                         }
                     } else {view!{cx,}})
-                    (if let Some(d) = defs.fire.clone() {
+                    (if let Some(d) = defs.fire {
                         view!{cx,
                             span(class="mc-red") {"✹ Fire "}
                             span {(format!("Defence: {d}"))}
                             br {}
                         }
                     } else {view!{cx,}})
-                    (if let Some(d) = defs.water.clone() {
+                    (if let Some(d) = defs.water {
                         view!{cx,
                             span(class="mc-aqua") {"✽ Water "}
                             span {(format!("Defence: {d}"))}
                             br {}
                         }
                     } else {view!{cx,}})
-                    (if let Some(d) = defs.air.clone() {
+                    (if let Some(d) = defs.air {
                         view!{cx,
                             span(class="mc-white") {"❋ Air "}
                             span {(format!("Defence: {d}"))}
                             br {}
                         }
                     } else {view!{cx,}})
-                    (if let Some(d) = defs.thunder.clone() {
+                    (if let Some(d) = defs.thunder {
                         view!{cx,
                             span(class="mc-yellow") {"✦ Thunder "}
                             span {(format!("Defence: {d}"))}
                             br {}
                         }
                     } else {view!{cx,}})
-                    (if let Some(d) = defs.earth.clone() {
+                    (if let Some(d) = defs.earth {
                         view!{cx,
                             span(class="mc-dark-green") {"✤ Earth "}
                             span {(format!("Defence: {d}"))}
@@ -201,7 +201,7 @@ pub fn ItemRender<'a, G: Html>(cx: Scope<'a>, props: ItemRenderProps<'a>) -> Vie
 
                     // the % of the id
                     let percent = create_selector(cx, move || if !fixed {
-                        get_percent(*id.value.get(), &id, &props.ordering.inverted)
+                        get_percent(*id.value.get(), id, &props.ordering.inverted)
                     } else {
                         0.0
                     });
@@ -213,12 +213,10 @@ pub fn ItemRender<'a, G: Html>(cx: Scope<'a>, props: ItemRenderProps<'a>) -> Vie
                         } else {
                             "mc-red"
                         }
+                    } else if *id.value.get() <= 0 {
+                        "mc-green"
                     } else {
-                        if *id.value.get() <= 0 {
-                            "mc-green"
-                        } else {
-                            "mc-red"
-                        }
+                        "mc-red"
                     };
 
                     // and the color for the %
@@ -235,11 +233,7 @@ pub fn ItemRender<'a, G: Html>(cx: Scope<'a>, props: ItemRenderProps<'a>) -> Vie
                     // seperate id groups
                     let spacing = if let Some(group) = &*lastgroup.get() {
                         // extra <br> if we're in a new group
-                        if !group.contains(props.ordering.order.get(&id.id).unwrap_or(&0)) {
-                            true
-                        } else {
-                            false
-                        }
+                        !group.contains(props.ordering.order.get(&id.id).unwrap_or(&0))
                     } else {
                         false
                     };
@@ -334,21 +328,21 @@ pub fn ItemRender<'a, G: Html>(cx: Scope<'a>, props: ItemRenderProps<'a>) -> Vie
 /// function for adding a + to positive numbers
 fn formatnum(num: i32) -> String {
     if num > 0 {
-        return format!("+{}", num);
+        format!("+{}", num)
     } else {
-        return format!("{}", num);
+        format!("{}", num)
     }
 }
 
 /// % calc stuff
-fn get_percent(value: i32, id: &Id, inverted: &Vec<Identification>) -> f64 {
+fn get_percent(value: i32, id: &Id, inverted: &[Identification]) -> f64 {
     // something stolen from the wynntils code
     let percent =
         ((value as f64 - id.min_id() as f64) / (id.max_id() as f64 - id.min_id() as f64)) * 100.0;
 
-    return if inverted.contains(&id.id) {
+    if inverted.contains(&id.id) {
         100.0 - percent
     } else {
         percent
-    };
+    }
 }

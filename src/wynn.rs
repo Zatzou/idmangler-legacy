@@ -1,4 +1,5 @@
 //! Module for wynncraft type definitions
+#![allow(clippy::upper_case_acronyms)]
 
 /// Item information and data
 pub mod items {
@@ -7,7 +8,7 @@ pub mod items {
     use std::{collections::BTreeMap, ops::RangeInclusive, fmt::Display};
 
     /// All possible rarities of items
-    #[derive(Debug, Deserialize, Clone, PartialEq)]
+    #[derive(Deserialize, Clone, PartialEq, Eq)]
     pub enum Rarity {
         NORMAL,
         UNIQUE,
@@ -34,7 +35,7 @@ pub mod items {
     }
 
     /// Item types
-    #[derive(Debug, Deserialize, Clone, PartialEq)]
+    #[derive(Deserialize, Clone, PartialEq, Eq)]
     pub enum Type {
         SPEAR,
         WAND,
@@ -73,7 +74,7 @@ pub mod items {
     /// 
     /// This enum offers the Other([String]) variant for ids that get updated and don't exist currently for compatibility
     #[allow(non_camel_case_types)]
-    #[derive(Debug, Deserialize, PartialEq, Eq, PartialOrd, Ord, Clone)]
+    #[derive(Deserialize, PartialEq, Eq, PartialOrd, Ord, Clone)]
     pub enum Identification {
         rawStrength,
         rawDexterity,
@@ -201,7 +202,7 @@ pub mod items {
     }
 
     #[allow(non_camel_case_types)]
-    #[derive(Debug, Deserialize, Clone, Copy, PartialEq)]
+    #[derive(Deserialize, Clone, Copy, PartialEq, Eq)]
     pub enum AttackSpeed {
         SUPER_SLOW,
         VERY_SLOW,
@@ -226,7 +227,7 @@ pub mod items {
         }
     }
 
-    #[derive(Debug, Deserialize, Clone)]
+    #[derive(Deserialize, Clone)]
     pub struct ItemList {
         pub items: Vec<Item>,
         #[serde(rename = "identificationOrder")]
@@ -234,7 +235,7 @@ pub mod items {
     }
 
     /// Representation of a wynntils api item
-    #[derive(Debug, Deserialize, Clone, PartialEq)]
+    #[derive(Deserialize, Clone, PartialEq, Eq)]
     pub struct Item {
         /// Name of the item
         #[serde(rename = "displayName")]
@@ -262,13 +263,13 @@ pub mod items {
         pub statuses: BTreeMap<Identification, StatusId>,
     }
 
-    #[derive(Debug, Deserialize, Clone, PartialEq)]
+    #[derive(Deserialize, Clone, PartialEq, Eq)]
     pub struct ItemInfo {
         pub r#type: Type,
     }
 
     /// requirements of an item
-    #[derive(Debug, Deserialize, Clone, PartialEq)]
+    #[derive(Deserialize, Clone, PartialEq, Eq)]
     pub struct Requirements {
         pub level: Option<i32>,
         pub strength: Option<i32>,
@@ -279,7 +280,7 @@ pub mod items {
     }
 
     /// damagetypes of the item
-    #[derive(Debug, Deserialize, Clone, PartialEq)]
+    #[derive(Deserialize, Clone, PartialEq, Eq)]
     pub struct DamageTypes {
         pub neutral: Option<String>,
         pub earth: Option<String>,
@@ -290,7 +291,7 @@ pub mod items {
     }
 
     /// defensetypes of the item
-    #[derive(Debug, Deserialize, Clone, PartialEq)]
+    #[derive(Deserialize, Clone, PartialEq, Eq)]
     pub struct DefenseTypes {
         pub health: Option<i32>,
         pub earth: Option<i32>,
@@ -302,7 +303,7 @@ pub mod items {
 
     /// Type of id
     #[allow(non_camel_case_types)]
-    #[derive(Debug, Deserialize, Clone, Copy, PartialEq)]
+    #[derive(Deserialize, Clone, Copy, PartialEq, Eq)]
     pub enum StatusType {
         PERCENTAGE,
         INTEGER,
@@ -314,7 +315,7 @@ pub mod items {
     /// Struct containing a single id for an item.
     ///
     /// This format is intended for deserialisation and does not contain the actual id type.
-    #[derive(Debug, Deserialize, Clone, PartialEq)]
+    #[derive(Deserialize, Clone, PartialEq, Eq)]
     pub struct StatusId {
         pub r#type: StatusType,
         #[serde(rename = "isFixed")]
@@ -324,7 +325,7 @@ pub mod items {
     }
 
     /// Struct for holding the order of identifications as defied by the wynntils api
-    #[derive(Debug, Deserialize, Clone)]
+    #[derive(Deserialize, Clone)]
     pub struct IdentificationOrder {
         pub order: BTreeMap<Identification, i32>,
         pub groups: Vec<WynntilsRange>,
@@ -332,7 +333,7 @@ pub mod items {
     }
 
     /// Custom range type for deserializing the ranges from the wynntils json
-    #[derive(Debug, Deserialize, Clone)]
+    #[derive(Deserialize, Clone)]
     pub struct WynntilsRange(String);
 
     impl WynntilsRange {
@@ -345,21 +346,8 @@ pub mod items {
         }
     }
 
-    // /// Groups for ids this should probably not be hardcoded but neither should many other things here
-    // pub const IDGROUPS: [RangeInclusive<i32>; 9] = [
-    //     1..=5,
-    //     6..=11,
-    //     12..=17,
-    //     18..=22,
-    //     23..=27,
-    //     28..=31,
-    //     32..=35,
-    //     36..=42,
-    //     43..=50,
-    // ];
-
     /// Powder types
-    #[derive(Clone, Copy, PartialEq)]
+    #[derive(Clone, Copy, PartialEq, Eq)]
     pub enum Powders {
         EARTH,
         THUNDER,
@@ -391,7 +379,7 @@ pub mod items {
         }
     }
 
-    #[derive(PartialEq, Clone, Debug)]
+    #[derive(PartialEq, Eq, Clone)]
     pub struct Id {
         pub id: Identification,
         pub idtype: StatusType,

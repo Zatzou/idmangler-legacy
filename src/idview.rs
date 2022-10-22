@@ -22,7 +22,7 @@ pub fn IdView<'a, G: Html>(cx: Scope<'a>, props: IdViewProps<'a>) -> View<G> {
         // encode the ids
         for id in props.ids.get().iter() {
             // check if the id is fixed
-            if !id.fixed && !(-1 <= id.baseval && id.baseval <= 1) {
+            if !(id.fixed || -1 <= id.baseval && id.baseval <= 1) {
                 // check if we will save a value or a %
                 if i32::abs(id.baseval) > 100 {
                     // calculate the %

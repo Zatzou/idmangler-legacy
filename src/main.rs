@@ -81,9 +81,8 @@ async fn App<G: Html>(cx: Scope<'_>) -> View<G> {
     let selected_item = create_selector(cx, || {
         let item = item_list.items.iter().find(|item| item.name.eq_ignore_ascii_case(&searchtext.get()));
 
-        if let Some(_) = item {
+        if item.is_some() {
             rerolls.set(1);
-
         } 
         item.cloned()
     });
@@ -91,7 +90,7 @@ async fn App<G: Html>(cx: Scope<'_>) -> View<G> {
     // the identifications of the currently selected item
     let selected_item_ids = create_selector(cx, || {
         if let Some(item) = &*selected_item.get() {
-            read_ids(&item, &item_list.order)
+            read_ids(item, &item_list.order)
         } else {
             Vec::new()
         }
@@ -107,8 +106,6 @@ async fn App<G: Html>(cx: Scope<'_>) -> View<G> {
             }
 
             powders
-            
-            // [None].repeat(item.max_powders as usize)
         } else {
             Vec::<RcSignal<Option<Powders>>>::new()
         }
@@ -124,7 +121,7 @@ async fn App<G: Html>(cx: Scope<'_>) -> View<G> {
 
                 form(class="pure-form pure-form-stacked") {
                     // main input box
-                    input(style="width: 100%;", prop:type="search", placeholder="Item name", list="items", bind:value=searchtext) //on:input=search_items
+                    input(style="width: 100%;", prop:type="search", placeholder="Item name", list="items", bind:value=searchtext)
 
                     datalist(id="items") {(itemnames)}
                 }
