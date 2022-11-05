@@ -164,7 +164,7 @@ async fn App<G: Html>(cx: Scope<'_>) -> View<G> {
                                             let value = create_signal(cx, powderval.to_string());
 
                                             let changeval = move |_| {
-                                                powder.set(Powders::from_i32(value.get().parse().unwrap()))
+                                                powder.set(Powders::from_i32(value.get().parse().unwrap_or_default()))
                                             };
 
                                             view!(cx,

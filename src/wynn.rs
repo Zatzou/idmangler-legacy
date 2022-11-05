@@ -337,7 +337,7 @@ pub mod items {
     pub struct WynntilsRange(String);
 
     impl WynntilsRange {
-        pub fn into_range(&self) -> RangeInclusive<i32> {
+        pub fn as_range(&self) -> RangeInclusive<i32> {
             let parts = self.0.split_once('-').unwrap_or(("0","0"));
             let first = parts.0.parse().unwrap_or(0);
             let second = parts.1.parse().unwrap_or(0);

@@ -54,7 +54,7 @@ pub fn IdView<'a, G: Html>(cx: Scope<'a>, props: IdViewProps<'a>) -> View<G> {
 
         for powder in props.powders.get().iter() {
             if appended == 4 {
-                powders.push(char::from_u32(OFFSET as u32 + currpowder).unwrap());
+                powders.push(char::from_u32(OFFSET as u32 + currpowder).unwrap_or('?'));
                 appended = 0;
                 currpowder = 0;
             }
@@ -66,7 +66,7 @@ pub fn IdView<'a, G: Html>(cx: Scope<'a>, props: IdViewProps<'a>) -> View<G> {
             }
         }
         if currpowder != 0 {
-            powders.push(char::from_u32(OFFSET as u32 + currpowder).unwrap());
+            powders.push(char::from_u32(OFFSET as u32 + currpowder).unwrap_or('?'));
         }
         if !powders.is_empty() {
             idstr.push(char::from_u32(0xF5FF2).unwrap());
@@ -74,7 +74,7 @@ pub fn IdView<'a, G: Html>(cx: Scope<'a>, props: IdViewProps<'a>) -> View<G> {
         }
 
         // add the rerolls
-        idstr.push(char::from_u32((OFFSET + *props.rerolls.get()) as u32).unwrap());
+        idstr.push(char::from_u32((OFFSET + *props.rerolls.get()) as u32).unwrap_or('?'));
         
         let name = if let Some(item) = &*props.item.get() {
             item.name.clone()

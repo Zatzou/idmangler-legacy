@@ -240,8 +240,8 @@ pub fn ItemRender<'a, G: Html>(cx: Scope<'a>, props: ItemRenderProps<'a>) -> Vie
 
                     // set the lastgroup
                     for group in &props.ordering.groups {
-                        if group.into_range().contains(props.ordering.order.get(&id.id).unwrap_or(&0)) {
-                            lastgroup.set(Some(group.into_range()));
+                        if group.as_range().contains(props.ordering.order.get(&id.id).unwrap_or(&0)) {
+                            lastgroup.set(Some(group.as_range()));
                         }
                     }
 
