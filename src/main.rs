@@ -1,14 +1,14 @@
 use reqwasm::http::Request;
 use sycamore::prelude::*;
 use sycamore::suspense::Suspense;
-use wynn::items::{ItemList, Id, Item, IdentificationOrder};
+use wynn::items::{Id, IdentificationOrder, Item, ItemList};
 
-use crate::{wynn::items::Powders, slider::Slider, idview::IdView, itemrender::ItemRender};
+use crate::{idview::IdView, itemrender::ItemRender, slider::Slider, wynn::items::Powders};
 
-mod wynn;
-mod slider;
 mod idview;
 mod itemrender;
+mod slider;
+mod wynn;
 
 pub const VERSION: &str = env!("CARGO_PKG_VERSION");
 
@@ -64,11 +64,12 @@ async fn App<G: Html>(cx: Scope<'_>) -> View<G> {
     let item_list = Box::leak(Box::new(item_list.unwrap()));
 
     let itemnames = View::new_fragment(
-        item_list.items
+        item_list
+            .items
             .iter()
             .cloned()
-            .map(|item| view!{cx, option(value=(item.name))})
-            .collect()
+            .map(|item| view! {cx, option(value=(item.name))})
+            .collect(),
     );
 
     let searchtext = create_signal(cx, String::new());
@@ -79,11 +80,14 @@ async fn App<G: Html>(cx: Scope<'_>) -> View<G> {
 
     // the currently selected item
     let selected_item = create_selector(cx, || {
-        let item = item_list.items.iter().find(|item| item.name.eq_ignore_ascii_case(&searchtext.get()));
+        let item = item_list
+            .items
+            .iter()
+            .find(|item| item.name.eq_ignore_ascii_case(&searchtext.get()));
 
         if item.is_some() {
             rerolls.set(1);
-        } 
+        }
         item.cloned()
     });
 
@@ -148,7 +152,7 @@ async fn App<G: Html>(cx: Scope<'_>) -> View<G> {
                             },
                             key=|id| id.baseval
                         )
-                        
+
                         // powder editor
                         (if selected_item_powders.get().len() != 0 {
                             view!{cx,
@@ -224,7 +228,7 @@ async fn App<G: Html>(cx: Scope<'_>) -> View<G> {
 /// function to read ids into a btreemap from an item
 fn read_ids(item: &Item, ord: &IdentificationOrder) -> Vec<Id> {
     let mut finalids = Vec::new();
-    
+
     // ensure sorting
     let mut ordering = ord.order.iter().collect::<Vec<_>>();
     ordering.sort_by(|a, b| a.1.cmp(b.1));
@@ -247,7 +251,9 @@ fn read_ids(item: &Item, ord: &IdentificationOrder) -> Vec<Id> {
 /// Function to fetch the itemlist from wynntils
 /// This function should probably have a fallback incase of api downtime but yea
 async fn get_itemlist() -> Result<ItemList, reqwasm::Error> {
-    let resp = Request::get("https://athena.wynntils.com/cache/get/itemList").send().await?;
+    let resp = Request::get("https://athena.wynntils.com/cache/get/itemList")
+        .send()
+        .await?;
 
     let item_list: ItemList = resp.json().await?;
 

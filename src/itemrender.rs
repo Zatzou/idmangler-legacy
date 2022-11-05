@@ -2,7 +2,7 @@ use std::ops::RangeInclusive;
 
 use sycamore::prelude::*;
 
-use crate::wynn::items::{Powders, Item, Id, StatusType, Identification, IdentificationOrder};
+use crate::wynn::items::{Id, Identification, IdentificationOrder, Item, Powders, StatusType};
 
 #[derive(Prop)]
 pub struct ItemRenderProps<'a> {
@@ -10,7 +10,7 @@ pub struct ItemRenderProps<'a> {
     ids: &'a ReadSignal<Vec<Id>>,
     powders: &'a ReadSignal<Vec<RcSignal<Option<Powders>>>>,
     rerolls: &'a ReadSignal<i32>,
-    ordering: &'a IdentificationOrder
+    ordering: &'a IdentificationOrder,
 }
 
 #[component]
@@ -272,7 +272,7 @@ pub fn ItemRender<'a, G: Html>(cx: Scope<'a>, props: ItemRenderProps<'a>) -> Vie
                 let usedpows = create_selector(cx, || {
                     powders.get().iter().filter(|p| p.get().is_some()).count()
                 });
-                
+
                 view!{cx,
                     span {
                         (format!("[{usedpows}/{}] Powder slots ", powders.get().len()))
@@ -300,7 +300,7 @@ pub fn ItemRender<'a, G: Html>(cx: Scope<'a>, props: ItemRenderProps<'a>) -> Vie
                                                     Powders::FIRE => "✹",
                                                     Powders::AIR => "❋",
                                                 };
-                                                
+
                                                 view!{cx,
                                                     span(class=class) {(symbol)}
                                                 }

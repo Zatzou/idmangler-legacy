@@ -5,7 +5,7 @@ pub struct SliderProps {
     name: String,
     min: i32,
     max: i32,
-    value: RcSignal<i32>
+    value: RcSignal<i32>,
 }
 
 #[component]

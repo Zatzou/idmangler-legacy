@@ -4,8 +4,8 @@
 /// Item information and data
 pub mod items {
     use serde::Deserialize;
+    use std::{collections::BTreeMap, fmt::Display, ops::RangeInclusive};
     use sycamore::reactive::RcSignal;
-    use std::{collections::BTreeMap, ops::RangeInclusive, fmt::Display};
 
     /// All possible rarities of items
     #[derive(Deserialize, Clone, PartialEq, Eq)]
@@ -71,7 +71,7 @@ pub mod items {
     }
 
     /// all wynncraft identifications
-    /// 
+    ///
     /// This enum offers the Other([String]) variant for ids that get updated and don't exist currently for compatibility
     #[allow(non_camel_case_types)]
     #[derive(Deserialize, PartialEq, Eq, PartialOrd, Ord, Clone)]
@@ -135,7 +135,7 @@ pub mod items {
         #[serde(rename = "4thSpellCost")]
         SpellCost4,
         /// This variant is intended to help with any weird api incompatibilities
-        Other(String)
+        Other(String),
     }
 
     impl Display for Identification {
@@ -338,7 +338,7 @@ pub mod items {
 
     impl WynntilsRange {
         pub fn as_range(&self) -> RangeInclusive<i32> {
-            let parts = self.0.split_once('-').unwrap_or(("0","0"));
+            let parts = self.0.split_once('-').unwrap_or(("0", "0"));
             let first = parts.0.parse().unwrap_or(0);
             let second = parts.1.parse().unwrap_or(0);
 
