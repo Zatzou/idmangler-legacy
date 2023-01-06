@@ -86,6 +86,10 @@ pub mod items {
         mainAttackDamage,
         rawSpellDamage,
         spellDamage,
+        rawElementalSpellDamage,
+        elementalSpellDamage,
+        // idk why this is seperate from rawSpellDamage but it is
+        rawNeutralSpellDamage,
         rawThunderSpellDamage,
         rawFireSpellDamage,
         rawAirSpellDamage,
@@ -134,8 +138,6 @@ pub mod items {
         raw4thSpellCost,
         #[serde(rename = "4thSpellCost")]
         SpellCost4,
-        /// This variant is intended to help with any weird api incompatibilities
-        Other(String),
     }
 
     impl Display for Identification {
@@ -151,6 +153,9 @@ pub mod items {
                 Identification::mainAttackDamage => "Main Attack Damage".fmt(f),
                 Identification::rawSpellDamage => "Spell Damage".fmt(f),
                 Identification::spellDamage => "Spell Damage".fmt(f),
+                Identification::rawElementalSpellDamage => "Raw elemental spell damage".fmt(f),
+                Identification::elementalSpellDamage => "Elemental spell damage".fmt(f),
+                Identification::rawNeutralSpellDamage => "Raw neutral spell damage".fmt(f),
                 Identification::rawHealth => "Health".fmt(f),
                 Identification::rawHealthRegen => "Health Regen".fmt(f),
                 Identification::healthRegen => "Health Regen".fmt(f),
@@ -194,9 +199,7 @@ pub mod items {
                 Identification::rawFireSpellDamage => "Fire Spell Damage".fmt(f),
                 Identification::rawAirSpellDamage => "Air Spell Damage".fmt(f),
                 Identification::rawEarthSpellDamage => "Earth Spell Damage".fmt(f),
-                Identification::rawWaterSpellDamage => "Water Spell Damage".fmt(f),
-                // just pass other possible strings thru
-                Identification::Other(s) => s.fmt(f),
+                Identification::rawWaterSpellDamage => "Water Spell Damage".fmt(f)
             }
         }
     }
