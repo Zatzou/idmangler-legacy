@@ -51,39 +51,44 @@ pub fn ItemRender<'a, G: Html>(cx: Scope<'a>, props: ItemRenderProps<'a>) -> Vie
                     (if let Some(d) = damages.neutral.clone() {
                         view!{cx,
                             span(class="mc-gold") {(format!("✣ Neutral Damage: {d}"))}
+                            br {}
                         }
                     } else {view!{cx,}})
                     (if let Some(d) = damages.fire.clone() {
                         view!{cx,
                             span(class="mc-red") {"✹ Fire "}
                             span {(format!("Damage: {d}"))}
+                            br {}
                         }
                     } else {view!{cx,}})
                     (if let Some(d) = damages.water.clone() {
                         view!{cx,
                             span(class="mc-aqua") {"✽ Water "}
                             span {(format!("Damage: {d}"))}
+                            br {}
                         }
                     } else {view!{cx,}})
                     (if let Some(d) = damages.air.clone() {
                         view!{cx,
                             span(class="mc-white") {"❋ Air "}
                             span {(format!("Damage: {d}"))}
+                            br {}
                         }
                     } else {view!{cx,}})
                     (if let Some(d) = damages.thunder.clone() {
                         view!{cx,
                             span(class="mc-yellow") {"✦ Thunder "}
                             span {(format!("Damage: {d}"))}
+                            br {}
                         }
                     } else {view!{cx,}})
                     (if let Some(d) = damages.earth.clone() {
                         view!{cx,
                             span(class="mc-dark-green") {"✤ Earth "}
                             span {(format!("Damage: {d}"))}
+                            br {}
                         }
                     } else {view!{cx,}})
-                    br {}
                 }
             } else {view!{cx,}})
             // defences
@@ -92,6 +97,7 @@ pub fn ItemRender<'a, G: Html>(cx: Scope<'a>, props: ItemRenderProps<'a>) -> Vie
                     (if let Some(d) = defs.health {
                         view!{cx,
                             span(class="mc-dark-red") {(format!("❤ Health: {d}"))}
+                            br {}
                         }
                     } else {view!{cx,}})
                     (if let Some(d) = defs.fire {
