@@ -1,4 +1,4 @@
-name: Rust
+name: Build on commits
 
 on:
   push:
@@ -20,6 +20,6 @@ jobs:
     - name: Download trunk
       run: wget -qO- https://github.com/thedodd/trunk/releases/download/v0.16.0/trunk-x86_64-unknown-linux-gnu.tar.gz | tar -xzf-
     - name: Build
-      run: ./trunk build --verbose 
+      run: ./trunk build
     - run: cat ./dist/index.html | sed "s@'/@'./@g" | sed 's@"/@"./@g'
       
