@@ -18,6 +18,8 @@ jobs:
     
     - name: Install wasm target
       run: rustup target add wasm32-unknown-unknown
+      
+    - uses: Swatinem/rust-cache@v1
         
     - name: Download trunk
       run: wget -qO- https://github.com/thedodd/trunk/releases/download/v0.16.0/trunk-x86_64-unknown-linux-gnu.tar.gz | tar -xzf-
@@ -42,7 +44,7 @@ jobs:
         run: rustup component add rustfmt
       
       - name: Format code
-        run: cargo fmt --all
+        run: cargo fmt
         
   clippy:
     runs-on: ubuntu-latest
@@ -50,6 +52,8 @@ jobs:
     steps:
       - name: Add clippy
         run: rustup component add clippy
+        
+      - uses: Swatinem/rust-cache@v1
         
       - name: Install Clippy sarif
         run: cargo install clippy-sarif sarif-fmt
@@ -59,6 +63,6 @@ jobs:
           clippy-sarif | tee results.sarif | sarif-fmt
           
       - name: Upload SARIF file
-        uses: github/codeql-action/upload-sarif@v1
+        uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: results.sarif
