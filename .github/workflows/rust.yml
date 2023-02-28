@@ -16,8 +16,8 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
-    - name: Install wasm toolchain
-      run: rustup toolchain install stable-wasm32-unknown-unknown
+    - name: Install wasm target
+      run: rustup target add wasm32-unknown-unknown
         
     - name: Download trunk
       run: wget -qO- https://github.com/thedodd/trunk/releases/download/v0.16.0/trunk-x86_64-unknown-linux-gnu.tar.gz | tar -xzf-
@@ -28,3 +28,7 @@ jobs:
     - name: Make wasm paths relative
       run: cat ./dist/index.html | sed "s@'/@'./@g" | sed 's@"/@"./@g'
       
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3.1.2
+      with:
+        path: dist/
