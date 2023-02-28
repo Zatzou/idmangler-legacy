@@ -56,7 +56,7 @@ jobs:
         run: rustup component add clippy
         
       - name: Install Clippy sarif
-        run: wget -O clippy-sarif https://github.com/psastras/sarif-rs/releases/download/clippy-sarif-v0.3.7/clippy-sarif-x86_64-unknown-linux-gnu
+        run: wget -O clippy-sarif https://github.com/psastras/sarif-rs/releases/download/clippy-sarif-v0.3.7/clippy-sarif-x86_64-unknown-linux-gnu ; chmod +x ./clippy-sarif
       
       - name: Run clippy
         run: cargo clippy --all-targets --all-features --message-format=json |
