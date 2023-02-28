@@ -26,9 +26,10 @@ jobs:
       run: ./trunk build
       
     - name: Make wasm paths relative
-      run: cat ./dist/index.html | sed "s@'/@'./@g" | sed 's@"/@"./@g'
+      run: cat ./dist/index.html | sed "s@'/@'./@g" | sed 's@"/@"./@g' > ./dist/index.html
       
     - name: Upload artifacts
       uses: actions/upload-artifact@v3.1.2
       with:
+        name: IdMangler
         path: dist/
