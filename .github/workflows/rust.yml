@@ -11,15 +11,24 @@ env:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
-    # download and extract trunk for building
+    
+    - name: Install wasm toolchain
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+        target: wasm32-unknown-unknown
+        override: true
+        
     - name: Download trunk
       run: wget -qO- https://github.com/thedodd/trunk/releases/download/v0.16.0/trunk-x86_64-unknown-linux-gnu.tar.gz | tar -xzf-
+      
     - name: Build
       run: ./trunk build
-    - run: cat ./dist/index.html | sed "s@'/@'./@g" | sed 's@"/@"./@g'
+      
+    - name: Make wasm paths relative
+      run: cat ./dist/index.html | sed "s@'/@'./@g" | sed 's@"/@"./@g'
       
