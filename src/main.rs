@@ -45,7 +45,7 @@ async fn App<G: Html>(cx: Scope<'_>) -> View<G> {
                     div(class="box") {
                         h1(class="title") {"Loading item data failed"}
                         p {(e.message)}
-                        p {"Contact Zatzou#3457 on discord and I will look into fixing this"}
+                        p {"Contact Zatzou#3457 on discord and I will look into fixing this (and if they are gone contact Super Probably Ender Non#2041)"}
                     }
                 }
             },
@@ -54,7 +54,7 @@ async fn App<G: Html>(cx: Scope<'_>) -> View<G> {
                     div(class="box") {
                         h1(class="title") {"Loading item data failed"}
                         p {(e)}
-                        p {"Contact Zatzou#3457 on discord and I will look into fixing this"}
+                        p {"Contact Zatzou#3457 on discord and I will look into fixing this (and if they are gone contact Super Probably Ender Non#2041)"}
                     }
                 }
             },
