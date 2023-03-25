@@ -27,7 +27,9 @@ fn main() {
                 }
             }
             div(style="position: fixed; bottom: 0; right: 0; z-index: -999; text-align: right") {
-                h4(style="margin: 5px; color: #aaa") {(format!("idMangler v{}", VERSION))}
+                h4(style="margin: 5px; color: #aaa") {
+                    a(href="https://github.com/Zatzou/idmangler", style="margin: 5px; color: #aaa"){(format!("idMangler v{}", VERSION))}
+                }
             }
         }
     });
@@ -45,7 +47,11 @@ async fn App<G: Html>(cx: Scope<'_>) -> View<G> {
                     div(class="box") {
                         h1(class="title") {"Loading item data failed"}
                         p {(e.message)}
-                        p {"Contact Zatzou#3457 on discord and I will look into fixing this"}
+                        p {
+                            "Please file an issue "
+                            span { a(href="https://github.com/Zatzou/idmangler/issues") {"here"} }
+                            ". If you do not have an github account you may also contact me on discord at Zatzou#3457"
+                        }
                     }
                 }
             },
@@ -54,7 +60,11 @@ async fn App<G: Html>(cx: Scope<'_>) -> View<G> {
                     div(class="box") {
                         h1(class="title") {"Loading item data failed"}
                         p {(e)}
-                        p {"Contact Zatzou#3457 on discord and I will look into fixing this"}
+                        p {
+                            "Please file an issue "
+                            span { a(href="https://github.com/Zatzou/idmangler/issues") {"here"} }
+                            ". If you do not have an github account you may also contact me on discord at Zatzou#3457"
+                        }
                     }
                 }
             },
