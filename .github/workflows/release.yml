@@ -17,22 +17,22 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-    - name: Download trunk
-      run: wget -qO- https://github.com/thedodd/trunk/releases/download/v0.16.0/trunk-x86_64-unknown-linux-gnu.tar.gz | tar -xzf-
+      - name: Download trunk
+        run: wget -qO- https://github.com/thedodd/trunk/releases/download/v0.16.0/trunk-x86_64-unknown-linux-gnu.tar.gz | tar -xzf-
       
-    - name: Build
-      run: ./trunk build release
-      
-    - name: Make wasm paths relative
-      run: cat ./dist/index.html | sed "s@'/@'./@g" | sed 's@"/@"./@g' > ./dist/index.html
-      
-    - name: Upload artifacts
-      uses: actions/upload-artifact@v3.1.2
-      with:
-        name: IdMangler
-        path: dist/
+      - name: Build
+        run: ./trunk build release
 
-    - name: Upload release
-      uses: ncipollo/release-action@v1
-      with:
-        artifacts: "dist/"
+      - name: Make wasm paths relative
+        run: cat ./dist/index.html | sed "s@'/@'./@g" | sed 's@"/@"./@g' > ./dist/index.html
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3.1.2
+        with:
+          name: IdMangler
+          path: dist/
+
+      - name: Upload release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "dist/"
