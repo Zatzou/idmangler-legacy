@@ -70,136 +70,36 @@ pub mod items {
         }
     }
 
-    /// all wynncraft identifications
-    ///
-    /// This enum offers the Other([String]) variant for ids that get updated and don't exist currently for compatibility
+    /// struct representing identification types
     #[allow(non_camel_case_types)]
     #[derive(Deserialize, PartialEq, Eq, PartialOrd, Ord, Clone)]
-    pub enum Identification {
-        rawStrength,
-        rawDexterity,
-        rawIntelligence,
-        rawDefence,
-        rawAgility,
-        attackSpeed,
-        rawMainAttackDamage,
-        mainAttackDamage,
-        rawSpellDamage,
-        spellDamage,
-        rawElementalSpellDamage,
-        elementalSpellDamage,
-        // idk why this is seperate from rawSpellDamage but it is
-        rawNeutralSpellDamage,
-        rawThunderSpellDamage,
-        rawFireSpellDamage,
-        rawAirSpellDamage,
-        rawEarthSpellDamage,
-        rawWaterSpellDamage,
-        rawHealth,
-        rawHealthRegen,
-        healthRegen,
-        lifeSteal,
-        manaRegen,
-        manaSteal,
-        earthDamage,
-        thunderDamage,
-        waterDamage,
-        fireDamage,
-        airDamage,
-        earthDefence,
-        thunderDefence,
-        waterDefence,
-        fireDefence,
-        airDefence,
-        exploding,
-        poison,
-        thorns,
-        reflection,
-        walkSpeed,
-        sprint,
-        sprintRegen,
-        rawJumpHeight,
-        soulPointRegen,
-        lootBonus,
-        lootQuality,
-        stealing,
-        xpBonus,
-        gatherXpBonus,
-        gatherSpeed,
-        raw1stSpellCost,
-        #[serde(rename = "1stSpellCost")]
-        SpellCost1,
-        raw2ndSpellCost,
-        #[serde(rename = "2ndSpellCost")]
-        SpellCost2,
-        raw3rdSpellCost,
-        #[serde(rename = "3rdSpellCost")]
-        SpellCost3,
-        raw4thSpellCost,
-        #[serde(rename = "4thSpellCost")]
-        SpellCost4,
-    }
+    pub struct Identification(String);
 
     impl Display for Identification {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match self {
-                Identification::rawStrength => "Strength".fmt(f),
-                Identification::rawDexterity => "Dexterity".fmt(f),
-                Identification::rawIntelligence => "Intelligence".fmt(f),
-                Identification::rawDefence => "Defence".fmt(f),
-                Identification::rawAgility => "Agility".fmt(f),
-                Identification::attackSpeed => "Attack Speed".fmt(f),
-                Identification::rawMainAttackDamage => "Main Attack Neutral Damage".fmt(f),
-                Identification::mainAttackDamage => "Main Attack Damage".fmt(f),
-                Identification::rawSpellDamage => "Spell Damage".fmt(f),
-                Identification::spellDamage => "Spell Damage".fmt(f),
-                Identification::rawElementalSpellDamage => "Raw elemental spell damage".fmt(f),
-                Identification::elementalSpellDamage => "Elemental spell damage".fmt(f),
-                Identification::rawNeutralSpellDamage => "Raw neutral spell damage".fmt(f),
-                Identification::rawHealth => "Health".fmt(f),
-                Identification::rawHealthRegen => "Health Regen".fmt(f),
-                Identification::healthRegen => "Health Regen".fmt(f),
-                Identification::lifeSteal => "Life Steal".fmt(f),
-                Identification::manaRegen => "Mana Regen".fmt(f),
-                Identification::manaSteal => "Mana Steal".fmt(f),
-                Identification::earthDamage => "Earth Damage".fmt(f),
-                Identification::thunderDamage => "Thunder Damage".fmt(f),
-                Identification::waterDamage => "Water Damage".fmt(f),
-                Identification::fireDamage => "Fire Damage".fmt(f),
-                Identification::airDamage => "Air Damage".fmt(f),
-                Identification::earthDefence => "Earth Defence".fmt(f),
-                Identification::thunderDefence => "Thunder Defence".fmt(f),
-                Identification::waterDefence => "Water Defence".fmt(f),
-                Identification::fireDefence => "Fire Defence".fmt(f),
-                Identification::airDefence => "Air Defence".fmt(f),
-                Identification::exploding => "Exploding".fmt(f),
-                Identification::poison => "Poison".fmt(f),
-                Identification::thorns => "Thorns".fmt(f),
-                Identification::reflection => "Reflection".fmt(f),
-                Identification::walkSpeed => "Walk Speed".fmt(f),
-                Identification::sprint => "Sprint".fmt(f),
-                Identification::sprintRegen => "Sprint Regen".fmt(f),
-                Identification::rawJumpHeight => "Jump Height".fmt(f),
-                Identification::soulPointRegen => "Soul Point Regen".fmt(f),
-                Identification::lootBonus => "Loot Bonus".fmt(f),
-                Identification::lootQuality => "Loot Quality".fmt(f),
-                Identification::stealing => "Stealing".fmt(f),
-                Identification::xpBonus => "XP Bonus".fmt(f),
-                Identification::gatherXpBonus => "Gather XP Bonus".fmt(f),
-                Identification::gatherSpeed => "Gather Speed".fmt(f),
-                Identification::raw1stSpellCost => "1st Spell Cost".fmt(f),
-                Identification::SpellCost1 => "1st Spell Cost".fmt(f),
-                Identification::raw2ndSpellCost => "2nd Spell Cost".fmt(f),
-                Identification::SpellCost2 => "2nd Spell Cost".fmt(f),
-                Identification::raw3rdSpellCost => "3rd Spell Cost".fmt(f),
-                Identification::SpellCost3 => "3rd Spell Cost".fmt(f),
-                Identification::raw4thSpellCost => "4th Spell Cost".fmt(f),
-                Identification::SpellCost4 => "4th Spell Cost".fmt(f),
-                Identification::rawThunderSpellDamage => "Thunder Spell Damage".fmt(f),
-                Identification::rawFireSpellDamage => "Fire Spell Damage".fmt(f),
-                Identification::rawAirSpellDamage => "Air Spell Damage".fmt(f),
-                Identification::rawEarthSpellDamage => "Earth Spell Damage".fmt(f),
-                Identification::rawWaterSpellDamage => "Water Spell Damage".fmt(f)
+            // handle some ids seperately and use general case for everything that works
+            match self.0.to_lowercase().as_str() {
+                "rawstrength" => "Strength".fmt(f),
+                "rawdexterity" => "Dexterity".fmt(f),
+                "rawintelligence" => "Intelligence".fmt(f),
+                "rawdefence" => "Defence".fmt(f),
+                "rawAgility" => "Agility".fmt(f),
+                "xpBonus" => "XP Bonus".fmt(f),
+                _ => {
+                    let mut s = String::new();
+                    let mut itr = self.0.chars().into_iter();
+
+                    s.push(itr.next().unwrap().to_ascii_uppercase());
+
+                    while let Some(c) = itr.next() {
+                        if c.is_uppercase() {
+                            s.push(' ');
+                        }
+                        s.push(c);
+                    }
+
+                    s.fmt(f)
+                }
             }
         }
     }
