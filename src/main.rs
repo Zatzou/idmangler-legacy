@@ -27,7 +27,7 @@ fn main() {
                 }
             }
             div(style="position: fixed; bottom: 0; right: 0; z-index: -999; text-align: right") {
-                h4(style="margin: 5px; color: #aaa") {(format!("idMangler v{}", VERSION," by Zatzou and 1% ender non"))}
+                h4(style="margin: 5px; color: #aaa") {(format!("idMangler v{} by Zatzou and ender non", VERSION))}
             }
         }
     });
