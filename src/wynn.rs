@@ -83,15 +83,15 @@ pub mod items {
                 "rawdexterity" => "Dexterity".fmt(f),
                 "rawintelligence" => "Intelligence".fmt(f),
                 "rawdefence" => "Defence".fmt(f),
-                "rawAgility" => "Agility".fmt(f),
-                "xpBonus" => "XP Bonus".fmt(f),
+                "rawagility" => "Agility".fmt(f),
+                "xpbonus" => "XP Bonus".fmt(f),
                 _ => {
                     let mut s = String::new();
-                    let mut itr = self.0.chars().into_iter();
+                    let mut itr = self.0.chars();
 
                     s.push(itr.next().unwrap().to_ascii_uppercase());
 
-                    while let Some(c) = itr.next() {
+                    for c in itr {
                         if c.is_uppercase() {
                             s.push(' ');
                         }
