@@ -106,6 +106,11 @@ pub mod items {
         waterDamage,
         fireDamage,
         airDamage,
+        earthSpellDamage, // safeguard against error
+        thunderDamage, // safeguard against error
+        waterSpellDamage, //caused issues lmao. fixed.
+        fireSpellDamage, // safeguard against error
+        airSpellDamage, // safeguard against error
         earthDefence,
         thunderDefence,
         waterDefence,
@@ -167,6 +172,11 @@ pub mod items {
                 Identification::waterDamage => "Water Damage".fmt(f),
                 Identification::fireDamage => "Fire Damage".fmt(f),
                 Identification::airDamage => "Air Damage".fmt(f),
+                Identification::earthSpellDamage => "Earth Spell Damage".fmt(f), // safeguard against error
+                Identification::thunderSpellDamage => "Thunder Spell Damage".fmt(f), // safeguard against error
+                Identification::waterSpellDamage => "Water Spell Damage".fmt(f), // the sh*t that broke it all
+                Identification::fireSpellDamage => "Fire Spell Damage".fmt(f), // safeguard against error
+                Identification::airSpellDamage => "Air Spell Damage".fmt(f), // safeguard against error
                 Identification::earthDefence => "Earth Defence".fmt(f),
                 Identification::thunderDefence => "Thunder Defence".fmt(f),
                 Identification::waterDefence => "Water Defence".fmt(f),
