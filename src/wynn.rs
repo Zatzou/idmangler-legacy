@@ -107,7 +107,7 @@ pub mod items {
         fireDamage,
         airDamage,
         earthSpellDamage, // safeguard against error
-        thunderDamage, // safeguard against error
+        thunderSpellDamage, // safeguard against error
         waterSpellDamage, //caused issues lmao. fixed.
         fireSpellDamage, // safeguard against error
         airSpellDamage, // safeguard against error
