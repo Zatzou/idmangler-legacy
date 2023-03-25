@@ -35,7 +35,10 @@ jobs:
           name: IdMangler
           path: dist/
 
+      - name: Make zip file
+        run: zip -r idmangler.zip dist
+
       - name: Upload release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "dist/"
+          artifacts: "idmangler.zip"
