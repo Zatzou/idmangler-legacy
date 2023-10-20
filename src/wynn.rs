@@ -10,26 +10,31 @@ pub mod items {
     /// All possible rarities of items
     #[derive(Deserialize, Clone, PartialEq, Eq)]
     pub enum Rarity {
-        NORMAL,
+        COMMON,
         UNIQUE,
         RARE,
         LEGENDARY,
         FABLED,
         MYTHIC,
         SET,
+
+        // TODO: fix once api issues are fixed
+        #[serde(other)]
+        INVALID,
     }
 
     // implement display for rarity
     impl Display for Rarity {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match self {
-                Rarity::NORMAL => "Normal".fmt(f),
+                Rarity::COMMON => "Common".fmt(f),
                 Rarity::UNIQUE => "Unique".fmt(f),
                 Rarity::RARE => "Rare".fmt(f),
                 Rarity::LEGENDARY => "Legendary".fmt(f),
                 Rarity::FABLED => "Fabled".fmt(f),
                 Rarity::MYTHIC => "Mythic".fmt(f),
                 Rarity::SET => "Set".fmt(f),
+                Rarity::INVALID => "".fmt(f),
             }
         }
     }
@@ -49,6 +54,10 @@ pub mod items {
         RING,
         BRACELET,
         NECKLACE,
+
+        /// TODO: fix once api issues are resolved
+        #[serde(other)]
+        INVALID,
     }
 
     impl Display for Type {
@@ -66,6 +75,8 @@ pub mod items {
                 Type::RING => "Ring".fmt(f),
                 Type::BRACELET => "Bracelet".fmt(f),
                 Type::NECKLACE => "Necklace".fmt(f),
+
+                Type::INVALID => "".fmt(f),
             }
         }
     }
@@ -146,7 +157,7 @@ pub mod items {
         /// Rarity of the item
         pub tier: Rarity,
         /// number of powders on the item
-        #[serde(rename = "powderAmount")]
+        #[serde(rename = "powderAmount", default)]
         pub max_powders: u8,
         /// Information about the item
         #[serde(rename = "itemInfo")]

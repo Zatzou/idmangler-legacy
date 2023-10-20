@@ -20,13 +20,14 @@ pub fn ItemRender<'a, G: Html>(cx: Scope<'a>, props: ItemRenderProps<'a>) -> Vie
 
     // rarity color of the item
     let item_col = match item.tier {
-        crate::wynn::items::Rarity::NORMAL => "mc-white",
+        crate::wynn::items::Rarity::COMMON => "mc-white",
         crate::wynn::items::Rarity::UNIQUE => "mc-yellow",
         crate::wynn::items::Rarity::RARE => "mc-light-purple",
         crate::wynn::items::Rarity::LEGENDARY => "mc-aqua",
         crate::wynn::items::Rarity::FABLED => "mc-red",
         crate::wynn::items::Rarity::MYTHIC => "mc-purple",
         crate::wynn::items::Rarity::SET => "mc-green",
+        crate::wynn::items::Rarity::INVALID => "",
     };
 
     let ids = create_ref(cx, props.ids);
