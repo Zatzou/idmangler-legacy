@@ -1,3 +1,7 @@
+# LEGACY IDMANGLER
+
+dead program go use https://crates.io/crates/idmangler-lib
+
 # idmangler
 Epic thing for making fake wynntils id strings
 
