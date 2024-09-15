@@ -1,3 +1,6 @@
+> [!WARNING]
+> This is the legacy version of idmangler which no longer works due to the system being switched out completely.
+
 # idmangler
 Epic thing for making fake wynntils id strings
 
